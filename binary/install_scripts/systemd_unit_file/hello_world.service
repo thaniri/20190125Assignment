@@ -1,0 +1,16 @@
+[Unit]
+Description=Hello World Script
+After=network.target
+
+[Service]
+User=ubuntu
+WorkingDirectory=/home/ubuntu
+ExecStart=/home/ubuntu/hello_world_app
+Type=simple
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=hello_world
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
