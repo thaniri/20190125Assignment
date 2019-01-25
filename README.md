@@ -1,5 +1,3 @@
-# 20190125Assignment
-
 # How this works:
 0. Install awscli on your computer and have credentials set up.
 1. Run this command to deploy a VPC, Autoscaling Group, S3 Bucket, and AWS CodeDeploy:
@@ -33,6 +31,7 @@
 4. Start and stop scripts are overly simplistic.
 5. Credentials should come from Vault.
 6. VPC is very simplistic. It just autoassigns a public IP to every web app to make development easy.
+7. Better variable naming
 
 ## Some assumptions made:
 
@@ -40,5 +39,5 @@
 2. The bucket name is the same for travis CI and S3. Which ends up meaning it was named in two places.
 
 # Where I got stuck:
-* My development practice is to build something manually and then code it afterwards. I got very stuck on an EC2 behaviour where an IAM profile attached to an EC2 instance cannot be changed after launch.
+* My development practice is to build something manually and then code it afterwards. I got stuck > 1hr on an EC2 behaviour where an IAM profile attached to an EC2 instance cannot be changed after launch.
 
