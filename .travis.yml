@@ -5,6 +5,7 @@ go:
 script:
    - go test -v ./...
    - go build -o ./binary/hello_world_app
+   - tar czvf ./binary/hello_world_app.tar.gz ./binary/hello_world_app && rm ./binary/hello_world_app
 deploy:
   provider: s3
   access_key_id: AKIAI3EBWH7UDETTUYQA

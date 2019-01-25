@@ -99,6 +99,21 @@ Resources:
       KeyName: 'boeing'
       SecurityGroups:
         - !Ref SecurityGroup
+      UserData: 
+        Fn::Base64: !Sub |
+          #!/bin/bash
+          sudo apt update
+          sudo apt install ruby -y
+          cd /home/ubuntu
+          wget https://aws-codedeploy-us-east-1.s3.amazonaws.com/latest/install
+          wget https://20190125-assignment.amazon.aws.com/hello_world_app.tar.gz
+          tar xzvf hello_world_app.tar.gz .
+          chmod +x ./binary/hello_world_app
+          ./binary/hello_world_app &
+          chmod +x ./install
+          sudo ./install auto
+          service codedeploy-agent start
+          service codedeploy-agent status
     DependsOn: VPCGatewayAttachment
   HelloWorldAutoScalingGroup:
     Type: AWS::AutoScaling::AutoScalingGroup
@@ -122,6 +137,16 @@ Resources:
     Type: AWS::S3::Bucket
     Properties:
       BucketName: 20190125assignment-thaniri
+  HelloWorldCodeDeploy:
+    Type: AWS::CodeDeploy::Application
+    Properties:
+      ApplicationName: HelloWorld
+  HelloWorldDeploymentGroup:
+    Type: AWS::CodeDeploy::DeploymentGroup
+    Properties:
+      ApplicationName: !Ref HelloWorldCodeDeploy
+      DeploymentGroupName: HelloWorld
+      ServiceRoleArn: arn:aws:iam::042363331216:role/thaniri-code-deploy
   SecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
@@ -143,3 +168,4 @@ Resources:
         - IpProtocol: -1
           CidrIp: 0.0.0.0/0
           Description: "Allow anything outbound."
+
