@@ -14,4 +14,4 @@ deploy:
   on:
     repo: thaniri/20190125Asssignment
   skip_cleanup: true
-  localdir: binary
+  local_dir: binary
