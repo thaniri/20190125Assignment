@@ -115,7 +115,14 @@ Resources:
           sudo ./install auto
           service codedeploy-agent start
           service codedeploy-agent status
+      IamInstanceProfile: !Ref EC2CodeDeployInstanceProfile
     DependsOn: VPCGatewayAttachment
+  EC2CodeDeployInstanceProfile:
+    Type: AWS::IAM::InstanceProfile
+    Properties:
+      Path: /
+      Roles:
+        - manual_ec2_to_codedeploy
   HelloWorldAutoScalingGroup:
     Type: AWS::AutoScaling::AutoScalingGroup
     Properties:

@@ -1,2 +1,2 @@
 #!/bin/bash
-chmod -R +x /home/ubuntu/binary
+chmod -R +x /home/ubuntu/install_scripts

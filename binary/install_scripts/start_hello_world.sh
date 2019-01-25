@@ -1,2 +1,2 @@
 #!/bin/bash
-/home/ubuntu/binary/hello_world_app &
+/home/ubuntu/hello_world_app &
