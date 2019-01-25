@@ -107,22 +107,35 @@ Resources:
           sudo apt install ruby -y
           cd /home/ubuntu
           wget https://aws-codedeploy-us-east-1.s3.amazonaws.com/latest/install
-          wget https://20190125-assignment.amazon.aws.com/hello_world_app.tar.gz
           tar xzvf hello_world_app.tar.gz .
-          chmod +x ./binary/hello_world_app
-          ./binary/hello_world_app &
           chmod +x ./install
           sudo ./install auto
           service codedeploy-agent start
           service codedeploy-agent status
       IamInstanceProfile: !Ref EC2CodeDeployInstanceProfile
     DependsOn: VPCGatewayAttachment
+  EC2CodeDeployIamRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: "Allow"
+            Action:
+              - "sts:AssumeRole"
+            Principal:
+              Service:
+              - ec2.amazonaws.com
+      ManagedPolicyArns:
+        - "arn:aws:iam::aws:policy/service-role/AmazonEC2RoleforAWSCodeDeploy"
+        - "arn:aws:iam::aws:policy/AmazonS3FullAccess"
+      RoleName: HelloWorldEC2CodeDeployRole
   EC2CodeDeployInstanceProfile:
     Type: AWS::IAM::InstanceProfile
     Properties:
       Path: /
       Roles:
-        - manual_ec2_to_codedeploy
+        - !Ref EC2CodeDeployIamRole
   HelloWorldAutoScalingGroup:
     Type: AWS::AutoScaling::AutoScalingGroup
     Properties:
@@ -150,12 +163,26 @@ Resources:
     Type: AWS::CodeDeploy::Application
     Properties:
       ApplicationName: HelloWorld
+  HelloWorldDeployRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17" 
+        Statement:
+          - Effect: "Allow"
+            Action:
+              - "sts:AssumeRole"
+            Principal:
+              Service:
+              - codedeploy.amazonaws.com
+      ManagedPolicyArns:
+        - "arn:aws:iam::aws:policy/service-role/AWSCodeDeployRole"
   HelloWorldDeploymentGroup:
     Type: AWS::CodeDeploy::DeploymentGroup
     Properties:
       ApplicationName: !Ref HelloWorldCodeDeploy
       DeploymentGroupName: HelloWorld
-      ServiceRoleArn: arn:aws:iam::042363331216:role/thaniri-code-deploy
+      ServiceRoleArn: !GetAtt HelloWorldDeployRole.Arn
       AutoScalingGroups:
         - !Ref HelloWorldAutoScalingGroup
   SecurityGroup:
