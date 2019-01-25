@@ -1,7 +1,7 @@
 # How this works:
 0. Install awscli on your computer and have credentials set up.
 1. Run this command to deploy a VPC, Autoscaling Group, S3 Bucket, and AWS CodeDeploy:
-`aws cloudformation deploy --stack-name <prod/dev/qa-stack> --template-file ./vpc.yaml --region <region you want> --capabilities CAPABILITY_IAM`
+`aws cloudformation deploy --stack-name <prod/dev/qa-stack> --template-file ./vpc.yaml --region <region you want> --capabilities CAPABILITY_NAMED_IAM`
 2. Make a pull request to this repo, travis CI will run some tests on it and upload it to an S3 bucket.
 3. Run this command to deploy the code: `aws deploy create-deployment --application-name HelloWorld --deployment-config-name CodeDeployDefault.OneAtATime --deployment-group-name HelloWorld --description "demo" --s3-location bucket=20190125assignment-thaniri,bundleType=tgz,key=hello_world_app.tgz --region us-east-1`
 4. Hit `http://loadbalancer-39959434.us-east-1.elb.amazonaws.com:8080` to see it live.
