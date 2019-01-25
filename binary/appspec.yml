@@ -13,8 +13,8 @@ hooks:
   ApplicationStart:
     - location: install_scripts/start_hello_world.sh
       timeout: 300
-      runas: ubuntu
+      runas: root
   ApplicationStop:
     - location: install_scripts/stop_hello_world.sh
       timeout: 300
-      runas: ubuntu
+      runas: root
