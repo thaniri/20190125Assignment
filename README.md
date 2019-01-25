@@ -39,5 +39,5 @@
 2. The bucket name is the same for travis CI and S3. Which ends up meaning it was named in two places.
 
 # Where I got stuck:
-* My development practice is to build something manually and then code it afterwards. I got stuck > 1hr on an EC2 behaviour where an IAM profile attached to an EC2 instance cannot be changed after launch.
+* My development practice is to build something manually and then code it afterwards. This is so I can understand what is going on before I do it. I got stuck > 1hr on an EC2 behaviour where an IAM profile attached to an EC2 instance cannot be changed after launch.
 
