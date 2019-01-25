@@ -80,9 +80,9 @@ Resources:
     Properties:
       LoadBalancerName: LoadBalancer
       Listeners:
-        - InstancePort: 80
+        - InstancePort: 8080
           InstanceProtocol: HTTP
-          LoadBalancerPort: 80
+          LoadBalancerPort: 8080
           Protocol: HTTP
       Scheme: internet-facing
       SecurityGroups:
@@ -145,6 +145,7 @@ Resources:
     Type: AWS::S3::Bucket
     Properties:
       BucketName: 20190125assignment-thaniri
+      #AccessControl: PublicRead
   HelloWorldCodeDeploy:
     Type: AWS::CodeDeploy::Application
     Properties:
