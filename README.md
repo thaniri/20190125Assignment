@@ -35,6 +35,7 @@
 5. Start and stop scripts are overly simplistic.
 6. Credentials should come from Vault.
 7. VPC is very simplistic. It just autoassigns a public IP to every web app to make development easy.
+8. Name variables in a sane way.
 
 ## Some assumptions made:
 
