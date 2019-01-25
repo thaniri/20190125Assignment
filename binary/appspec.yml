@@ -1,0 +1,20 @@
+---
+version: 0.0
+os: linux
+hooks:
+  BeforeInstall:
+    - location: install_scripts/fetch_hello_world.sh
+      timeout: 300
+      runas: ubuntu
+  AfterInstall:
+    - location: install_scripts/change_permissions.sh
+      timeout: 300
+      runas: root
+  ApplicationStart:
+    - location: install_scripts/start_hello_world.sh
+      timeout: 300
+      runas: ubuntu
+  ApplicationStop:
+    - location: install_scripts/stop_hello_world.sh
+      timeout: 300
+      runas: ubuntu
