@@ -1,5 +1,3 @@
-# 20190125Assignment
-
 # How this works:
 0. Install awscli on your computer and have credentials set up.
 1. Run this command to deploy a VPC, Autoscaling Group, S3 Bucket, and AWS CodeDeploy:
